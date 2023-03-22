@@ -191,6 +191,23 @@ header .navbar {
     flex-direction: row;
 }
 
+.logosection {
+  background: #bcb9b9;
+  width: 250px;
+  padding: 10px;
+  position: fixed;
+  z-index: 99999;
+}
+.logosection {
+  background:#bcb9b9;
+  /* // margin: -20px; */
+  padding: 15px;
+}
+
+.logosection img {
+  filter: brightness(0) invert(1);
+}
+
 /* ---------------------------------------------------
     CONTENT STYLE
 ----------------------------------------------------- */
