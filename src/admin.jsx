@@ -86,6 +86,8 @@ function Admin() {
           ? "Offers Mapping"
           : queryParams.pathname === "/grade"
           ? ""
+          : queryParams.pathname === "/pricingmodel"
+          ? ""
           : null}
       </div>
 

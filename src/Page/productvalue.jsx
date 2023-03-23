@@ -1,54 +1,57 @@
-// import React from 'react'
-// import Sidebar from "../Common/Sidebar";
 import Sidebar from "../Common/Sidebar";
 import React, { useEffect, useState } from "react";
 import * as Yup from "yup";
 import { useFormik } from "formik";
 import toast from "react-hot-toast";
-// import { AuthGet, AuthPost, AuthPut, Put } from "../../common_var/httpService";
 import { useStateValue } from ".././Common/stateprovider";
 import axios from "axios";
 import Mapprovider from "../Common/mapprovider";
 
 function productvalue() {
   const [initialState] = useStateValue();
-  console.log("ytryrystrysrystrsty", initialState);
   const token = sessionStorage.getItem("Token");
   const [data, setdata] = useState([]);
-  const [gradeeditedRowId, setgradeEditedRowId] = useState(null);
-  const [gradeeditedValue, setgradeditedValue] = useState([]);
+  const [productvalue, setproductvalue] = useState([]);
+  const [offer, setoffer] = useState([]);
+  const [productEdit, setProductEdit] = useState(null);
+  const [productEditValue, setProductEditValue] = useState();
 
   useEffect(() => {
     if (initialState?.settingid !== "") {
-      getGradeList();
+      getProductvalueList();
     }
   }, [initialState]);
   const config = {
     headers: { Authorization: `Bearer ${token}` },
   };
-  const Gradeadd = useFormik({
+  const Productvalueadd = useFormik({
     initialValues: {
-      description: "",
+      offerId: "",
+      offerValue: "",
       settingId: initialState?.settingid?.setting_id,
     },
     onSubmit: async (values) => {
-      let sendData = {
-        description: values.description,
-        settingId: Number(initialState?.settingid),
-      };
+      if (values.offerId === "default") {
+        alert("Offer Value Is Required");
+        // toast.error("Offer Value Is Required", { duration: 4000 });
+        return;
+      }
+      values.offerValue = parseInt(values.offerValue);
+      values.offerId = parseInt(values.offerId);
+      values.settingId = Number(initialState?.settingid);
 
       axios
         .post(
-          "https://de-dev-api.theecentral.com/api/grade/add-grade",
-          sendData,
+          "https://de-dev-api.theecentral.com/api/product-value/add-offervalue",
+          values,
           config
         )
         .then(
           (response) => {
             if (response?.status === 200 || response?.status === 201) {
-              Gradeadd.resetForm();
-              alert("Grade Added Successfully");
-              getGradeList();
+              Productvalueadd.resetForm();
+              alert("Product Value Added Successfully");
+              getProductvalueList();
             } else {
               alert("eerrror");
             }
@@ -60,54 +63,65 @@ function productvalue() {
     },
   });
 
-  const gradeedit = useFormik({
+
+  const editProduct = useFormik({
     initialValues: {
-      description: gradeeditedValue.description,
+      offerValue: productEditValue?.offerValue
+        ? productEditValue?.offerValue
+        : "",
+      offerId: productEditValue?.offerId ? productEditValue?.offerId : "",
     },
-    // validationSchema: validationSchema,
+    enableReinitialize: true,
+    // validationSchema: productOfferValidations,
     onSubmit: async (values) => {
-      let sendData = {
-        description: gradeeditedValue,
-      };
-      console.log(gradeeditedValue);
-
+      if (values.offerId === "default") {
+        toast.error("Offer Value Is Required", { duration: 4000 });
+        return;
+      }
+      values.offerValue = parseInt(values.offerValue);
+      values.offerId = parseInt(values.offerId);
+      values.settingId = Number(initialState?.settingid);
+      
+      console.log('values::: ', values);
       axios
-        .put(
-          `https://de-dev-api.theecentral.com/api/grade/update-grade/${gradeeditedRowId}`,
-          sendData,
-          config
-        )
-        .then(
-          (response) => {
-            if (response?.status === 200 || response?.status === 201) {
-              gradeedit.setValues(response?.gradeeditedValue);
-              setgradeEditedRowId(null);
-              // getGradeList();
-              Gradeadd.resetForm();
-              alert("Grade Updated Successfully");
-              getGradeList();
-            } else {
-              alert("eerrror");
-            }
-          },
-          (error) => {
-            console.log(error);
-          }
-        );
+      .put(
+        `https://de-dev-api.theecentral.com/api/product-value/update-offervalue/${productEditValue?.id}`,
+        values,
+        config
+      ).then((res) => {
+        if (res?.status === 200) {
+          setProductEdit(null);
+          toast.success(res.message, { duration: 4000 });
+          getProductvalueList();
+        } else {
+          toast.error(res.message, { duration: 4000 });
+        }
+      });
     },
   });
 
-  const getGradeList = async () => {
+
+
+  const getProductvalueList = async () => {
     axios
       .get(
-        `https://de-dev-api.theecentral.com/api/grade/get-all/${initialState?.settingid}`,
+        `https://de-dev-api.theecentral.com/api/product-value/get-all-offervalue/${initialState?.settingid}`,
         config
       )
       .then(function (response) {
         if (response?.status === 200) {
           setdata(response?.data);
+          setproductvalue(response?.data.products);
+          setoffer(response?.data.offers);
 
-          console.log("ddddddddddddddddddddddddddddddd", response.data);
+          console.log(
+            "ddddddddddddddddddddddddddddddd",
+            response?.data.products
+          );
+          console.log(
+            "ddddddddddddddddddddddddfhdgfdhgfdhgfhgddddddd",
+            response?.data.offers
+          );
         }
       })
       .catch((err) => {
@@ -127,12 +141,13 @@ function productvalue() {
       .put(
         `https://de-dev-api.theecentral.com/api/grade/grade-inactive/${id}`,
         // config,
-        sendData,config
+        sendData,
+        config
       )
       .then(
         (response) => {
           if (response?.status === 200 || response?.status === 201) {
-            getGradeList();
+            getProductvalueList();
             alert("Grade Delete Successfully");
           } else {
             alert("eerrror");
@@ -143,48 +158,40 @@ function productvalue() {
         }
       );
   };
+
+  const deleteoffer = async (data) => {
+    let sendData = {
+      active: false,
+      offerId: data?.product_id,
+      settingId: +initialState?.settingid,
+    };
+    console.log("Data: ", data);
+    
+    axios
+      .put(
+        `https://de-dev-api.theecentral.com/api/product-value/offervalue-inactive/${data.id}`,
+        // config,
+        sendData,
+        config
+      )
+      .then((response) => {
+        if (response?.status === 200|| response?.status === 201) {
+          alert("product value ")
+          // toast.success(res.message, { duration: 4000 });
+          getProductvalueList();
+        } else {
+          // toast.error(res.message);
+        }
+      })
+      .catch((err) => toast.error(err));
+  };
   return (
-    // <div>productvalue</div>
-    // <div id="content">
-    //   <Sidebar />
-    //   <div className="ContentWrapper">
-    //     <nav className="navbar navbar-default">
-    //       <div className="container-fluid">
-    //         <div className="navbar-header">Product Value</div>
-    //       </div>
-    //     </nav>
-
-    //     <div className="mainContent">
-    //       <h2>Collapsible Sidebar Using Bootstrap 3</h2>
-    //       <p>
-    //         Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-    //         eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-    //         ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-    //         aliquip ex ea commodo consequat. Duis aute irure dolor in
-    //         reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-    //         pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-    //         culpa qui officia deserunt mollit anim id est laborum.
-    //       </p>
-    //       <p>
-    //         Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-    //         eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-    //         ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-    //         aliquip ex ea commodo consequat. Duis aute irure dolor in
-    //         reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-    //         pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-    //         culpa qui officia deserunt mollit anim id est laborum.
-    //       </p>
-
-    //       <div className="line"></div>
-    //     </div>
-    //   </div>
-    // </div>
     <div id="content">
       <Sidebar />
       <div className="ContentWrapper">
         <nav className="navbar navbar-default">
           <div className="container-fluid">
-            <div className="navbar-header">Grade</div>
+            <div className="navbar-header">Product Name </div>
           </div>
           <div className="container-fluid">
             <Mapprovider />
@@ -192,47 +199,70 @@ function productvalue() {
         </nav>
 
         <div className="mainContent">
-          <form>
+          <form onSubmit={Productvalueadd.handleSubmit}>
             <div className="container-fluid">
               <div className="row align-items-center">
+                <div className="col-md-2">
+                  <div className="form-group">
+                    <label for="ContactName">Offer Name</label>
+                    <select
+                      className="form-select"
+                      name="offerId"
+                      onChange={Productvalueadd.handleChange}
+                      onBlur={Productvalueadd.handleBlur}
+                      value={Productvalueadd.values.offerId}
+                    >
+                      <option defaultValue value="default">
+                        Select Offer
+                      </option>
+                      {offer?.map((offers) => (
+                        <option value={offers?.id}>
+                          {offers?.offer_label}
+                        </option>
+                      ))}
+                    </select>
+                    {Productvalueadd.touched.offerId &&
+                    Productvalueadd.errors.offerId ? (
+                      <span className="error_text text-danger">
+                        {Productvalueadd.errors.offerId}
+                      </span>
+                    ) : null}
+                  </div>
+                </div>
                 <div className="col-md-2 ">
                   {" "}
-                  <label for="ContactName">Grade &nbsp;</label>
+                  <label for="ContactName">Offer value &nbsp;</label>
                 </div>
                 <div className="col-md-2 ">
                   <input
-                    name="description"
-                    placeholder="Enter Grade"
-                    formControlName="description"
-                    id="description"
-                    onChange={Gradeadd.handleChange}
-                    onBlur={Gradeadd.handleBlur}
-                    value={Gradeadd.values.description.replace(
-                      /[^A-Za-z]/gi,
-                      ""
-                    )}
-                    className="form-control"
-                  />{" "}
-                </div>
-                <div className="col-md-2 ">
-                  {" "}
-                  <button
-                    className="btn btn-outline-success displayFlex AlignItemCenter"
-                    type="submit"
-                    onClick={Gradeadd.handleSubmit}
-                    disabled={Gradeadd.values.description === ""}
-                  >
-                    <i className="fas fa-plus"></i>
-
-                    <div className="pl10"> ADD </div>
-                  </button>{" "}
+                    name="offerValue"
+                    className="form-select"
+                    placeholder="Enter Offer Value"
+                    id="offerValue"
+                    onChange={(e) => {
+                      Productvalueadd.setFieldValue(
+                        "offerValue",
+                        e.target.value.replace(/[^0-9]/g, "")
+                      );
+                    }}
+                    onBlur={Productvalueadd.handleBlur}
+                    value={Productvalueadd.values.offerValue}
+                  />
+                  {Productvalueadd.touched.offerValue &&
+                  Productvalueadd.errors.offerValue ? (
+                    <span className="error_text text-danger">
+                      {Productvalueadd.errors.offerValue}
+                    </span>
+                  ) : null}
                 </div>
 
-                {Gradeadd.touched.description && Gradeadd.errors.description ? (
-                  <p className="error_text text-danger">
-                    {Gradeadd.errors.description}
-                  </p>
-                ) : null}
+                <div className="col-md-3">
+                  <div className="form-group">
+                    <button type="submit" className="btn btn-success mt18">
+                      ADD
+                    </button>
+                  </div>
+                </div>
               </div>
             </div>
           </form>
@@ -244,86 +274,149 @@ function productvalue() {
                   <thead>
                     <tr>
                       <th style={{ width: "10%" }}>S.No</th>
-                      <th style={{ width: "70%" }}>Grade</th>
+                      <th style={{ width: "70%" }}>Product Name</th>
+                      <th style={{ width: "70%" }}>Value</th>
+
                       <th style={{ width: "20%" }}>Action</th>
                     </tr>
                   </thead>
+                  
                   <tbody>
-                    {data.data?.map((data, index) => (
-                      <tr key={data.id}>
-                        <td scope="row">{index + 1}</td>
+                    {offer?.length > 0 ? (
+                      offer?.map((data, index) => (
+                        <tr key={data.id}>
+                          <td>{index + 1}</td>
+                          <td>
+                            {productEdit === index ? (
+                              <>
+                                <label for="ContactName">Offer Name</label>
+                                <select
+                                  className="form-select"
+                                  name="offerId"
+                                  onChange={(e) => {
+                                    setProductEditValue({
+                                      ...productEditValue,
+                                      offerId: e.target.value,
+                                    });
+                                  }}
+                                  onBlur={editProduct.handleBlur}
+                                  value={editProduct.values.offerId}
+                                >
+                                  <option defaultValue value="default">
+                                    Select Offer
+                                  </option>
+                                  {productvalue?.map((offers) => (
+                                    <option value={offers?.id}>
+                                      {offers?.offer_label}
+                                    </option>
+                                  ))}
+                                </select>
 
-                        <td>
-                          {gradeeditedRowId === data.id ? (
-                            <input
-                              type="text"
-                              name="description"
-                              className="form-control"
-                              placeholder="Grade"
-                              value={gradeeditedValue}
-                              onChange={(e) =>
-                                setgradeditedValue(e.target.value)
-                              }
-                            />
-                          ) : (
-                            <span>{data.description}</span>
-                          )}
-                        </td>
+                                {editProduct.touched.offerId &&
+                                editProduct.errors.offerId ? (
+                                  <p className="error_text text-danger">
+                                    {editProduct.errors.offerId}
+                                  </p>
+                                ) : null}
+                              </>
+                            ) : (
+                              <span>{data?.offer_label}</span>
+                            )}
+                          </td>
 
-                        <td>
-                          {gradeeditedRowId === data.id ? (
-                            <div>
-                              <button
-                                className="btn btn-primary"
-                                type="button"
-                                style={{
-                                  marginRight: "10px",
-                                }}
-                                onClick={() => {
-                                  gradeedit.handleSubmit();
-                                }}
-                              >
-                                Save
-                              </button>
-                              <button
-                                className="btn btn-primary"
-                                type="button"
-                                onClick={() => {
-                                  setgradeEditedRowId(null);
-                                }}
-                              >
-                                Cancel
-                              </button>
-                            </div>
-                          ) : (
-                            <div>
-                              <button
-                                className="btn btn-outline-primary"
-                                type="button"
-                                style={{
-                                  marginRight: "10px",
-                                }}
-                                onClick={() => {
-                                  setgradeEditedRowId(data.id);
-                                  setgradeditedValue(data.description);
-                                  gradeedit.setValues(data.description);
-                                }}
-                              >
-                                <i class="fa fa-pencil-square-o"></i>
-                              </button>
+                          <td>
+                            {productEdit === index ? (
+                              <>
+                                <input
+                                  name="offerValue"
+                                  className="form-select"
+                                  placeholder="Enter To Score"
+                                  id="editProductValue"
+                                  onChange={(e) => {
+                                    setProductEditValue({
+                                      ...productEditValue,
+                                      offerValue: e.target.value,
+                                    });
+                                  }}
+                                  onBlur={editProduct.handleBlur}
+                                  value={editProduct.values.offerValue}
+                                />
 
-                              <button
-                                className="btn btn-outline-danger"
-                                type="button"
-                                onClick={() => gradeDelete(data.id)}
-                              >
-                                <i class="fa fa-trash"></i>
-                              </button>
-                            </div>
-                          )}
-                        </td>
-                      </tr>
-                    ))}
+                                {editProduct.touched.offerValue &&
+                                editProduct.errors.offerValue ? (
+                                  <p className="error_text text-danger">
+                                    {editProduct.errors.offerValue}
+                                  </p>
+                                ) : null}
+                              </>
+                            ) : (
+                              <span>{data?.offer_value}</span>
+                            )}
+                          </td>
+
+                          <td>
+                            {productEdit === index ? (
+                              <div>
+                                <button
+                                  className="btn btn-primary"
+                                  type="button"
+                                  style={{
+                                    marginRight: "10px",
+                                  }}
+                                  onClick={() => {
+                                    editProduct.handleSubmit();
+                                  }}
+                                >
+                                  Save
+                                </button>
+                                <button
+                                  className="btn btn-primary"
+                                  type="button"
+                                  onClick={() => {
+                                    setProductEdit(null);
+                                  }}
+                                >
+                                  Cancel
+                                </button>
+                              </div>
+                            ) : (
+                              <div>
+                                <button
+                                  className="btn btn-outline-primary"
+                                  type="button"
+                                  style={{
+                                    marginRight: "10px",
+                                  }}
+                                  onClick={() => {
+                                    console.log("data::: ", data);
+                                    setProductEdit(index);
+                                    setProductEditValue({
+                                      offerValue: data.offer_value,
+                                      offerId: data?.product_id,
+                                      id: data.id,
+                                    });
+                                  }}
+                                >
+                                  <i className="fa fa-pencil-square-o"></i>
+                                </button>
+
+                                <button
+                                  className="btn btn-outline-danger"
+                                  onClick={() => deleteoffer(data)}
+                                  type="button"
+                                >
+                                  <i className="fa fa-trash"></i>
+                                </button>
+                              </div>
+                            )}
+                          </td>
+                        </tr>
+                      ))
+                    ) : (
+                      <td colSpan="7" className="nodatarow">
+                        No Offered Value Available for the Selected Provider
+                      </td>
+                    )}
                   </tbody>
                 </table>
               </form>
@@ -332,7 +425,7 @@ function productvalue() {
         </div>
       </div>
     </div>
-  )
+  );
 }
 
-export default productvalue
+export default productvalue;

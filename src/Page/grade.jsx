@@ -142,11 +142,6 @@ function grade() {
       );
   };
 
-  // useEffect(() => {
-  //   if (initialState?.settingid !== "") {
-  //     getGradeList();
-  //   }
-  // }, [initialState]);
   return (
     <div id="content">
       <Sidebar />

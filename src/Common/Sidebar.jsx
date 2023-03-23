@@ -35,9 +35,9 @@ function Sidebar() {
                     <li onClick={() => navigate("/grade")}>
                         <a href="#">Grade</a>
                     </li>
-                    {/* <li onClick={() => navigate("/deconfig")}>
+                    <li onClick={() => navigate("/pricingmodel")}>
                         <a href="#">Princing Model</a>
-                    </li> */}
+                    </li>
                     <li onClick={() => navigate("/offerproduct")}>
                         <a href="#">Offerd Product</a>
                     </li>
