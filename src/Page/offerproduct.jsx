@@ -1,11 +1,9 @@
-// import React from 'react'
-// import Sidebar from "../Common/Sidebar";
+
 import Sidebar from "../Common/Sidebar";
 import React, { useEffect, useState } from "react";
 import * as Yup from "yup";
 import { useFormik } from "formik";
 import toast from "react-hot-toast";
-// import { AuthGet, AuthPost, AuthPut, Put } from "../../common_var/httpService";
 import { useStateValue } from ".././Common/stateprovider";
 import axios from "axios";
 import Mapprovider from "../Common/mapprovider";
@@ -65,7 +63,6 @@ function offerproduct() {
     initialValues: {
       offer_label: offerproducteditedValue.offer_label,
     },
-    // validationSchema: validationSchema,
     onSubmit: async (values) => {
       let sendData = {
         offerLabel: offerproducteditedValue,
@@ -166,7 +163,7 @@ function offerproduct() {
               <div className="row align-items-center">
                 <div className="col-md-2 ">
                   {" "}
-                  <label for="ContactName">Offer Product &nbsp;</label>
+                  <label for="ContactName">Offer Product</label>
                 </div>
                 <div className="col-md-2 ">
                   <input

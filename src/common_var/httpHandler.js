@@ -13,12 +13,10 @@ const createHandler = (method) => {
       data: body,
     };
     try {
-      console.log("gtuysyudtyddytdytdr",data);
       const response = await axios(config);
       return response.data;
     } catch (error) {
       console.log(error);
-      // throw new Error(JSON.stringify(error.response));
       return error;
     }
 

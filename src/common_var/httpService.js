@@ -7,7 +7,6 @@ export const geturl = (url) => {
   return `${process.env.REACT_APP_ADMIN_API_URL}/${url}`;
 };
 
-// console.log("fghfdgdffgfd",url)
 
 export const AuthPost = async (url, body) => {
   token = sessionStorage.getItem("token");

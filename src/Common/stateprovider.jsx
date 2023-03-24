@@ -8,14 +8,7 @@ import React, {
   export const StateContext = createContext();
   
   export const StateProvider = ({ reducer, initialState, children }) => {
-    // const [authState, setAuthState] = useState(null);
-  
-  
-    // if (authState === null && data != null && data != {}) {
-    // console.log("data in----->", data);
-
-    //   setAuthState(data);
-    // }
+    
   
     return (
       <StateContext.Provider

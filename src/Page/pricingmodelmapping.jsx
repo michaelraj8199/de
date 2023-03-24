@@ -19,12 +19,6 @@ function pricingmodelmapping() {
 
   const [data, setdata] = useState([]);
 
-  // const [gradebin, setgradebin] = useState([])
-
-  const [offer, setOffer] = useState([]);
-  const [offerValue, setOfferValue] = useState([]);
-  const [terms, setTerms] = useState();
-
   useEffect(() => {
     if (initialState?.settingid !== "") {
       getProductvalueList();
@@ -57,7 +51,6 @@ function pricingmodelmapping() {
         settingId: Number(initialState.settingid),
         grade_id: Number(values.grades),
         apr: Number(values.apr),
-        
       };
 
       axios
@@ -93,13 +86,10 @@ function pricingmodelmapping() {
       )
       .then(function (response) {
         if (response?.status === 200) {
-          // console.log("jcvjcvjcvcjcvjcvjcv", response.data.incomeBin);
           setincomebin(response.data.incomeBin);
           setGradebin(response.data.gradeBin);
           setscorebin(response.data.scoreBin);
           setscorevalue(response.data.scoreValue);
-
-          // console.log("ghfshgsc", response.data);
         }
       })
       .catch((err) => {
@@ -107,14 +97,11 @@ function pricingmodelmapping() {
 
         toast.error(err);
       });
-
-    
   };
 
   const deleteoffer = async (id) => {
     let sendData = {
       active: false,
-      // gradeId: data?.term_grade_id,
       settingId: +initialState?.settingid,
     };
     console.log("Data: ", data);
@@ -122,17 +109,16 @@ function pricingmodelmapping() {
     axios
       .put(
         `https://de-dev-api.theecentral.com/api/offers-mapping/inactive/${id}`,
-        // config,
         sendData,
         config
       )
       .then((response) => {
         if (response?.status === 200 || response?.status === 201) {
           alert("Offer mapping delete ");
-          // toast.success(res.message, { duration: 4000 });
+          toast.success("Offer mapping delete");
           getProductvalueList();
         } else {
-          // toast.error(res.message);
+          toast.error("please select value");
         }
       })
       .catch((err) => toast.error(err));
@@ -169,9 +155,7 @@ function pricingmodelmapping() {
                         Select Grade
                       </option>
                       {gradebin?.map((offers) => (
-                        <option value={offers?.id}>
-                          {offers?.value}
-                        </option>
+                        <option value={offers?.id}>{offers?.value}</option>
                       ))}
                     </select>
                     {Productvalueadd.touched.grades &&
@@ -196,9 +180,7 @@ function pricingmodelmapping() {
                         Select Score
                       </option>
                       {scorebin?.map((offers) => (
-                        <option value={offers?.id}>
-                          {offers?.score}
-                        </option>
+                        <option value={offers?.id}>{offers?.score}</option>
                       ))}
                     </select>
                     {Productvalueadd.touched.score &&
@@ -223,9 +205,7 @@ function pricingmodelmapping() {
                         Select Term
                       </option>
                       {incomebin?.map((offers) => (
-                        <option value={offers?.id}>
-                          {offers?.income}
-                        </option>
+                        <option value={offers?.id}>{offers?.income}</option>
                       ))}
                     </select>
                     {Productvalueadd.touched.income &&
@@ -242,7 +222,6 @@ function pricingmodelmapping() {
 
                   <input
                     name="apr"
-                    
                     className="form-control"
                     placeholder="Enter APR"
                     id="apr"
@@ -255,8 +234,7 @@ function pricingmodelmapping() {
                     onBlur={Productvalueadd.handleBlur}
                     value={Productvalueadd.values.apr}
                   />
-                  {Productvalueadd.touched.apr &&
-                  Productvalueadd.errors.apr ? (
+                  {Productvalueadd.touched.apr && Productvalueadd.errors.apr ? (
                     <span className="error_text text-danger">
                       {Productvalueadd.errors.apr}
                     </span>
@@ -291,45 +269,7 @@ function pricingmodelmapping() {
                       <th style={{ width: "20%" }}>Action</th>
                     </tr>
                   </thead>
-                  {/* 
-                  <tbody>
-                    {data.length > 0 ? (
-                      data.map((data, index) => (
-                        <tr key={data?.id}>
-                          <td>{index + 1}</td>
-                          <td>
-                            <span>{data?.grade}</span>
-                          </td>
-                          <td>
-                            <span>{data?.offer_name}</span>
-                          </td>
-                          <td>
-                            <span>{data?.offer_value}</span>
-                          </td>
-                          <td>
-                            <span>{data?.min_apr}</span>
-                          </td>
-                          <td>
-                            <span>{data?.max_apr}</span>
-                          </td>
-
-                          <td>
-                            <button
-                              className="btn btn-outline-danger"
-                              onClick={() => deleteoffer(data?.term_grade_id)}
-                              type="button"
-                            >
-                              <i className="fa fa-trash"></i>
-                            </button>
-                          </td>
-                        </tr>
-                      ))
-                    ) : (
-                      <td colSpan="5" className="nodatarow">
-                        No Terms Available for the Selected Provider
-                      </td>
-                    )}
-                  </tbody> */}
+                  
                 </table>
               </form>
             </div>

@@ -33,7 +33,6 @@ function offermapping() {
       offerValue: "",
       minAPR: "",
       maxAPR: "",
-      // settingId: initialState?.settingid?.setting_id,
     },
     onSubmit: async (values) => {
       let sendData = {
@@ -77,7 +76,6 @@ function offermapping() {
         if (response?.status === 200) {
           console.log("jcvjcvjcvcjcvjcvjcv", response.data.current_data);
           setdata(response.data.current_data);
-          // setTerms(response.data);
           setGrade(response.data.grades);
           setOffer(response.data.offers);
           setOfferValue(response.data.offerValue);
@@ -95,7 +93,6 @@ function offermapping() {
   const deleteoffer = async (id) => {
     let sendData = {
       active: false,
-      // gradeId: data?.term_grade_id,
       settingId: +initialState?.settingid,
     };
     console.log("Data: ", data);
@@ -103,17 +100,16 @@ function offermapping() {
     axios
       .put(
         `https://de-dev-api.theecentral.com/api/offers-mapping/inactive/${id}`,
-        // config,
         sendData,
         config
       )
       .then((response) => {
         if (response?.status === 200 || response?.status === 201) {
           alert("Offer mapping delete ");
-          // toast.success(res.message, { duration: 4000 });
+          toast.success("Offer mapping delete");
           getProductvalueList();
         } else {
-          // toast.error(res.message);
+          toast.error("Please  required");
         }
       })
       .catch((err) => toast.error(err));
@@ -222,7 +218,7 @@ function offermapping() {
 
                   <input
                     name="minAPR"
-                    className="form-select"
+                    className="form-control"
                     placeholder="Enter Mininum APR"
                     id="minAPR"
                     onChange={(e) => {
@@ -247,7 +243,7 @@ function offermapping() {
 
                   <input
                     name="maxAPR"
-                    className="form-select"
+                    className="form-control"
                     placeholder="Enter Maximium APR"
                     id="maxAPR"
                     onChange={(e) => {

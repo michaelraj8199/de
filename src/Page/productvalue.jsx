@@ -82,7 +82,6 @@ function productvalue() {
       values.offerId = parseInt(values.offerId);
       values.settingId = Number(initialState?.settingid);
       
-      console.log('values::: ', values);
       axios
       .put(
         `https://de-dev-api.theecentral.com/api/product-value/update-offervalue/${productEditValue?.id}`,
@@ -114,14 +113,7 @@ function productvalue() {
           setproductvalue(response?.data.products);
           setoffer(response?.data.offers);
 
-          console.log(
-            "ddddddddddddddddddddddddddddddd",
-            response?.data.products
-          );
-          console.log(
-            "ddddddddddddddddddddddddfhdgfdhgfdhgfhgddddddd",
-            response?.data.offers
-          );
+          
         }
       })
       .catch((err) => {
@@ -165,7 +157,6 @@ function productvalue() {
       offerId: data?.product_id,
       settingId: +initialState?.settingid,
     };
-    console.log("Data: ", data);
     
     axios
       .put(
@@ -388,7 +379,6 @@ function productvalue() {
                                     marginRight: "10px",
                                   }}
                                   onClick={() => {
-                                    console.log("data::: ", data);
                                     setProductEdit(index);
                                     setProductEditValue({
                                       offerValue: data.offer_value,

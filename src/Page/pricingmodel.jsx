@@ -16,7 +16,6 @@ function pricingmodel() {
   const [scoreEdit, setScoreEdit] = useState(null);
   const [scoreEditValue, setScoreEditValue] = useState("");
   const [income, setincome] = useState();
-  console.log("ufdytfcdhfhdg", income);
 
   const [incomeedit, setincomeid] = useState(null);
   const [incomeEditValue, setincomeEditValue] = useState("");

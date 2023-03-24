@@ -13,12 +13,11 @@ import Termmapping from "./Page/termmapping";
 import Productvalue from "./Page/productvalue";
 import Runinsanbox from "./Page/runinsanbox";
 import Deconfig from "./Page/deconfig";
-
 import footerlogo from "./asset/whitelogo.svg";
-import MapProvider from "./Common/mapprovider";
-import { Post } from "./common_var/httpService";
-import Sidebar from "./Common/Sidebar";
 import axios from "axios";
+import Sidebar from "./Common/Sidebar";
+
+
 
 function Admin() {
   const queryParams = useLocation();
@@ -46,26 +45,19 @@ function Admin() {
       })
       .then(
         (response) => {
-          console.log(
-            "tdttdtdtttttttttttttttttt",
-            response.data.jwtAccessToken
-          );
           if (response.status === 200)
             sessionStorage.setItem("Token", response.data.jwtAccessToken);
-          console.log(response);
         },
         (error) => {
           console.log(error);
         }
       );
     let token = sessionStorage.getItem("Token");
-    console.log("Token::: ", token);
   }, []);
   return (
     <div>
       <div className="logosection">
         <div className="displayFlex">
-          {/* <img src={menuicon} className="mobileMenuicon" /> */}
           <img src={footerlogo} className=" " />
         </div>
       </div>
@@ -96,12 +88,7 @@ function Admin() {
       </div>
 
       <div>
-        <div>{/* <Adminsidebar /> */}</div>
-        {/* {queryParams.pathname !== "/admin/login" && (
-         
-        )} */}
         <div>
-          {/* <MapProvider /> */}
           <main>{routes}</main>
         </div>
       </div>

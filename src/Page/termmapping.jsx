@@ -30,12 +30,11 @@ function termmapping() {
     },
     onSubmit: async (values) => {
       if (values.gradeId === "default") {
-        alert("select gradeid Is Required");
-        // toast.error("Offer Value Is Required", { duration: 4000 });
+        toast.error("Offer Value Is Required");
         return;
       }
       if (values.termId === "default") {
-        alert("select termId Is Required");
+        toast.error("select termId Is Required");
 
         return;
       }
@@ -77,39 +76,33 @@ function termmapping() {
       .then(function (response) {
         if (response?.status === 200) {
           setTerms(response.data);
-
-          console.log("ghfshgsc", response.data);
         }
       })
       .catch((err) => {
         console.log(err);
 
-        toast.error(err);
+        toast.error("err");
       });
   };
 
   const deleteoffer = async (id) => {
     let sendData = {
       active: false,
-      // gradeId: data?.term_grade_id,
       settingId: +initialState?.settingid,
     };
-    console.log("Data: ", data);
 
     axios
       .put(
         `https://de-dev-api.theecentral.com/api/term-mapping/inactive/${id}`,
-        // config,
         sendData,
         config
       )
       .then((response) => {
         if (response?.status === 200 || response?.status === 201) {
-          alert("Term mapping delete ");
-          // toast.success(res.message, { duration: 4000 });
+          toast.success("Term mapping delete");
           getProductvalueList();
         } else {
-          // toast.error(res.message);
+          toast.error("INVALID");
         }
       })
       .catch((err) => toast.error(err));

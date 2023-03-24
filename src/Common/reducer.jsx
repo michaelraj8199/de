@@ -24,7 +24,6 @@ export const reducer = (state, action) => {
       return {
         ...state,
         settingid: data1,
-        // settingid: action.payload,
       };
 
     

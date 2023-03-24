@@ -25,16 +25,13 @@ function mapprovider() {
       .then(function (response) {
         if (response?.status === 200) {
           setsetting(response?.data);
-          console.log("cguyfuufrytttttttttttt",response?.data.data)
           dispatch({
             type: "Set_setting_id",
             payload: response?.data.data[0]?.id,
           });
 
-          console.log("ytrxetrxetret",response?.data.data[0]?.id);
           ;
         }
-        console.log(setting); 
       })
       .catch((err) => {
         console.log(err);
@@ -66,7 +63,6 @@ function mapprovider() {
             );
             if (response.status === 200)
               sessionStorage.setItem("Token", response.data.jwtAccessToken);
-            console.log(response);
           },
           (error) => {
             console.log(error);
@@ -74,7 +70,6 @@ function mapprovider() {
         );
 
       let token = sessionStorage.getItem("Token");
-      console.log("Token::: ", token);
     } else {
       getseetingList(token);
     }

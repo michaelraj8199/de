@@ -12,14 +12,11 @@ function Sidebar() {
                 </div>
 
                 <ul className="list-unstyled components">
-                    {/* <p>DE</p> */}
 
                     <li onClick={() => navigate("/deconfig")} >
                         <a href="#">DE Config </a>
                     </li>
-                    {/* <li onClick={() => navigate("/deconfig")}>
-                        <a href="#">Rule Databases</a>
-                    </li> */}
+                    
                     <li onClick={() => navigate("/pricingmodelmapping")}>
                         <a href="#">Pricing Model Mapping </a>
                     </li>
@@ -29,9 +26,7 @@ function Sidebar() {
                     <li onClick={() => navigate("/termmapping")}>
                         <a href="#">Terms Mapping</a>
                     </li>
-                    {/* <li onClick={() => navigate("/runinsanbox")}>
-                        <a href="#">Run In Sandbox</a>
-                    </li> */}
+                    
                     <li onClick={() => navigate("/grade")}>
                         <a href="#">Grade</a>
                     </li>

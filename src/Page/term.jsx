@@ -12,7 +12,6 @@ import Mapprovider from "../Common/mapprovider";
 
 function term() {
   const [initialState] = useStateValue();
-  console.log("ytryrystrysrystrsty", initialState);
   const token = sessionStorage.getItem("Token");
   const [data, setdata] = useState([]);
   const [termeditedRowId, settermEditedRowId] = useState(null);
@@ -73,7 +72,6 @@ function term() {
       let sendData = {
         description: termeditedValue,
       };
-      console.log(termeditedValue);
 
       axios
         .put(
@@ -112,7 +110,6 @@ function term() {
         if (response?.status === 200) {
           setdata(response?.data);
 
-          console.log("ddddddddddddddddddddddddddddddd", response.data);
         }
       })
       .catch((err) => {

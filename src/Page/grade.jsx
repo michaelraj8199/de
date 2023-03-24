@@ -8,7 +8,6 @@ import axios from "axios";
 import Mapprovider from "../Common/mapprovider";
 function grade() {
   const [initialState] = useStateValue();
-  console.log("ytryrystrysrystrsty", initialState);
   const token = sessionStorage.getItem("Token");
   const [data, setdata] = useState([]);
   const [gradeeditedRowId, setgradeEditedRowId] = useState(null);
@@ -66,7 +65,6 @@ function grade() {
       let sendData = {
         description: gradeeditedValue,
       };
-      console.log(gradeeditedValue);
 
       axios
         .put(
@@ -85,7 +83,7 @@ function grade() {
               getGradeList();
             } else {
               // alert("eerrror");
-              // toast.success("Grade Updated Successfully"); 
+              // toast.success("Grade Updated Successfully");
             }
           },
           (error) => {
@@ -104,8 +102,6 @@ function grade() {
       .then(function (response) {
         if (response?.status === 200) {
           setdata(response?.data);
-
-          console.log("ddddddddddddddddddddddddddddddd", response.data);
         }
       })
       .catch((err) => {
@@ -140,7 +136,12 @@ function grade() {
         (error) => {
           console.log(error);
         }
-      );
+      )
+      .catch((err) => {
+        console.log(err);
+
+        toast.error(err);
+      });
   };
 
   return (
