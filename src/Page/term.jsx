@@ -1,14 +1,12 @@
-// import React from 'react'
-// import Sidebar from "../Common/Sidebar";
 import Sidebar from "../Common/Sidebar";
 import React, { useEffect, useState } from "react";
 import * as Yup from "yup";
 import { useFormik } from "formik";
 import toast from "react-hot-toast";
-// import { AuthGet, AuthPost, AuthPut, Put } from "../../common_var/httpService";
 import { useStateValue } from ".././Common/stateprovider";
 import axios from "axios";
 import Mapprovider from "../Common/mapprovider";
+import Button from "react-bootstrap/Button";
 
 function term() {
   const [initialState] = useStateValue();
@@ -32,7 +30,6 @@ function term() {
     },
     validationSchema: Yup.object({
       term_description: Yup.string().required("*Term  is required"),
-      
     }),
     onSubmit: async (values) => {
       let sendData = {
@@ -109,7 +106,6 @@ function term() {
       .then(function (response) {
         if (response?.status === 200) {
           setdata(response?.data);
-
         }
       })
       .catch((err) => {
@@ -129,7 +125,8 @@ function term() {
       .put(
         `https://de-dev-api.theecentral.com/api/term-model/update-inactive/${id}`,
         // config,
-        sendData,config
+        sendData,
+        config
       )
       .then(
         (response) => {
@@ -146,7 +143,6 @@ function term() {
       );
   };
   return (
-    
     <div id="content">
       <Sidebar />
       <div className="ContentWrapper">
@@ -196,7 +192,8 @@ function term() {
                   </button>{" "}
                 </div>
 
-                {termadd.touched.term_description && termadd.errors.term_description ? (
+                {termadd.touched.term_description &&
+                termadd.errors.term_description ? (
                   <p className="error_text text-danger">
                     {termadd.errors.term_description}
                   </p>
@@ -265,8 +262,8 @@ function term() {
                             </div>
                           ) : (
                             <div>
-                              <button
-                                className="btn btn-outline-primary"
+                              <Button
+                                variant="primary"
                                 type="button"
                                 style={{
                                   marginRight: "10px",
@@ -277,16 +274,15 @@ function term() {
                                   gradeedit.setValues(data.term_description);
                                 }}
                               >
-                                <i class="fa fa-pencil-square-o"></i>
-                              </button>
+                                Edit
+                              </Button>
 
-                              <button
-                                className="btn btn-outline-danger"
-                                type="button"
+                              <Button
+                                variant="secondary"
                                 onClick={() => gradeDelete(data.id)}
                               >
-                                <i class="fa fa-trash"></i>
-                              </button>
+                                Delete
+                              </Button>
                             </div>
                           )}
                         </td>
@@ -300,8 +296,7 @@ function term() {
         </div>
       </div>
     </div>
-
-  )
+  );
 }
 
-export default term
+export default term;

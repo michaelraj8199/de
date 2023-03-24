@@ -185,7 +185,7 @@ function termmapping() {
 
                   <input
                     name="term_duration"
-                    className="form-select"
+                    className="form-control"
                     placeholder="Enter Duration"
                     id="term_duration"
                     onChange={(e) => {

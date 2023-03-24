@@ -227,7 +227,7 @@ function productvalue() {
                 <div className="col-md-2 ">
                   <input
                     name="offerValue"
-                    className="form-select"
+                    className="form-control"
                     placeholder="Enter Offer Value"
                     id="offerValue"
                     onChange={(e) => {
@@ -320,7 +320,7 @@ function productvalue() {
                               <>
                                 <input
                                   name="offerValue"
-                                  className="form-select"
+                                  className="form-control"
                                   placeholder="Enter To Score"
                                   id="editProductValue"
                                   onChange={(e) => {

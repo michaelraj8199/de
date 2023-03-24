@@ -151,49 +151,49 @@ function pricingmodel() {
     },
   });
 
-  // const editincome = useFormik({
-  //   initialValues: {
-  //     fromScore: scoreEditValue?.fromScore ? scoreEditValue?.fromScore : "",
-  //     toScore: scoreEditValue?.toScore ? scoreEditValue?.toScore : "",
-  //     offerId: scoreEditValue?.offerId ? scoreEditValue?.offerId : "",
-  //     // fromScore: scoreEditValue.fromScore,
-  //   },
-  //   // validationSchema: validationSchema,
-  //   onSubmit: async (values, { resetForm }) => {
-  //     if (values.offerId === "default") {
-  //       toast.error("Offer Value Is Required", { duration: 4000 });
-  //       return;
-  //     }
-  //     values.fromScore = parseInt(values.fromScore);
-  //     values.toScore = parseInt(values.toScore);
-  //     values.offerId = scoreEdit;
+  const editincome = useFormik({
+    initialValues: {
+      fromScore: incomeEditValue?.fromScore ? incomeEditValue?.fromScore : "",
+      toScore: incomeEditValue?.toScore ? incomeEditValue?.toScore : "",
+      offerId: incomeEditValue?.offerId ? incomeEditValue?.offerId : "",
+      // fromScore: incomeEditValue.fromScore,
+    },
+    // validationSchema: validationSchema,
+    onSubmit: async (values, { resetForm }) => {
+      if (values.offerId === "default") {
+        toast.error("Offer Value Is Required", { duration: 4000 });
+        return;
+      }
+      values.fromScore = parseInt(values.fromScore);
+      values.toScore = parseInt(values.toScore);
+      values.offerId = incomeedit;
 
-  //     axios
-  //       .put(
-  //         `https://de-dev-api.theecentral.com/api/pricing-model/update-score/${scoreEdit}`,
-  //         values,
-  //         config
-  //       )
-  //       .then(
-  //         (response) => {
-  //           console.log("hgfddsgfdsgfdsg", response);
-  //           if (response?.status === 200) {
-  //             // scoreEdit.setValues(response?.scoreEditValue);
+      axios
+        .put(
+          `https://de-dev-api.theecentral.com/api/pricing-model/update-income/${incomeedit}`,
+          values,
+          config
+        )
+        .then(
+          (response) => {
+            console.log("hgfddsgfdsgfdsg", response);
+            if (response?.status === 200) {
+              // scoreEdit.setValues(response?.incomeEditValue);
 
-  //             setincomeid(null);
-  //             alert(" opiuuk Updated Successfully");
-  //             resetForm();
-  //             getScoreList();
-  //           } else {
-  //             alert("eerrror");
-  //           }
-  //         },
-  //         (error) => {
-  //           console.log(error);
-  //         }
-  //       );
-  //   },
-  // });
+              setincomeid(null);
+              alert(" opiuuk Updated Successfully");
+              resetForm();
+              getScoreList();
+            } else {
+              alert("eerrror");
+            }
+          },
+          (error) => {
+            console.log(error);
+          }
+        );
+    },
+  });
 
   const getScoreList = async () => {
     axios
@@ -204,16 +204,6 @@ function pricingmodel() {
       .then(function (response) {
         if (response?.status === 200) {
           setScore_n_offerData(response?.data.allScores);
-
-          console.log(
-            "tttttttttttttttttttttttttttttttttt",
-            setScore_n_offerData
-          );
-
-          console.log(
-            "ddddddddddddddddddddddddddddddd",
-            response?.data.allScores
-          );
         }
       })
       .catch((err) => {
@@ -233,7 +223,7 @@ function pricingmodel() {
         if (response?.status === 200) {
           setincome(response?.data);
 
-          console.log("tttttttttttttttttttttttttttttttttt", response?.data);
+          console.log("666666666666666666666666666666666", response.data);
         }
       })
       .catch((err) => {
@@ -269,7 +259,7 @@ function pricingmodel() {
                     <label for="fromScore">From Score</label>
                     <input
                       name="fromScore"
-                      className="form-select"
+                      className="form-control"
                       placeholder="Enter From Score"
                       id="fromScore"
                       onChange={(e) => {
@@ -293,7 +283,7 @@ function pricingmodel() {
                     <label for="toScore"> To Score</label>
                     <input
                       name="toScore"
-                      className="form-select"
+                      className="form-control"
                       placeholder="Enter To Score"
                       id="toScore"
                       onChange={(e) => {
@@ -347,12 +337,12 @@ function pricingmodel() {
                               <>
                                 <input
                                   name="fromScore"
-                                  className="form-select"
+                                  className="form-control"
                                   placeholder="Enter From Score"
                                   id="fromScore"
                                   // onChange={(e) => {
                                   //   setScoreEditValue({
-                                  //     ...scoreEditValue,
+                                  //     ...incomeEditValue,
                                   //     fromScore: e.target.value.replace(
                                   //       /[^0-9]/g,
                                   //       ""
@@ -380,13 +370,13 @@ function pricingmodel() {
                             {scoreEdit === data.id ? (
                               <>
                                 <input
-                                  name="toScore"
-                                  className="form-select"
-                                  placeholder="Enter To Score"
+                                  name="minIncome"
+                                  className="form-control"
+                                  placeholder="Enter To minIncome"
                                   id="editScoretToScore"
                                   // onChange={(e) => {
                                   //   setScoreEditValue({
-                                  //     ...scoreEditValue,
+                                  //     ...incomeEditValue,
                                   //     toScore: e.target.value.replace(
                                   //       /[^0-9]/g,
                                   //       ""
@@ -395,13 +385,13 @@ function pricingmodel() {
                                   // }}
                                   onChange={editScore.handleChange}
                                   onBlur={editScore.handleBlur}
-                                  value={editScore.values.toScore}
+                                  value={editScore.values.minIncome}
                                 />
 
-                                {editScore.touched.toScore &&
-                                editScore.errors.toScore ? (
+                                {editScore.touched.minIncome &&
+                                editScore.errors.minIncome ? (
                                   <p className="error_text text-danger">
-                                    {editScore.errors.toScore}
+                                    {editScore.errors.minIncome}
                                   </p>
                                 ) : null}
                               </>
@@ -491,14 +481,14 @@ function pricingmodel() {
               <div className="row align-items-center">
                 <div className="col-md-2 ">
                   {" "}
-                  <label for="ContactName"> Income &nbsp;</label>
+                  <label for="ContactName"> Income</label>
                 </div>
                 <div className="col-md-2 ">
                   <div className="form-group">
                     <label for="minIncome">MinIncome</label>
                     <input
                       name="minIncome"
-                      className="form-select"
+                      className="form-control"
                       placeholder="Enter From minIncome"
                       id="minIncome"
                       onChange={(e) => {
@@ -508,12 +498,12 @@ function pricingmodel() {
                         );
                       }}
                       onBlur={addIncome.handleBlur}
-                      value={addIncome.values.fromScore}
+                      value={addIncome.values.minIncome}
                     />
-                    {addIncome.touched.fromScore &&
-                    addIncome.errors.fromScore ? (
+                    {addIncome.touched.minIncome &&
+                    addIncome.errors.minIncome ? (
                       <span className="error_text text-danger">
-                        {addIncome.errors.fromScore}
+                        {addIncome.errors.minIncome}
                       </span>
                     ) : null}
                   </div>
@@ -523,7 +513,7 @@ function pricingmodel() {
                     <label for="maxIncome"> MaxIncome</label>
                     <input
                       name="maxIncome"
-                      className="form-select"
+                      className="form-control"
                       placeholder="Enter maxIncome"
                       id="maxIncome"
                       onChange={(e) => {
@@ -568,8 +558,8 @@ function pricingmodel() {
                     </tr>
                   </thead>
                   <tbody>
-                    {income?.length > 0 ? (
-                      income?.map((data, index) => (
+                    {income && income?.data.length > 0 ? (
+                      income?.data.map((data, index) => (
                         <tr key={data.id}>
                           <td scope="row">{index + 1}</td>
 
@@ -577,19 +567,19 @@ function pricingmodel() {
                             {incomeedit === data.id ? (
                               <>
                                 <input
-                                  name="fromScore"
-                                  className="form-select"
+                                  name="minIncome"
+                                  className="form-control"
                                   placeholder="Enter From Score"
-                                  id="fromScore"
+                                  id="minIncome"
                                   onChange={editincome.handleChange}
                                   onBlur={editincome.handleBlur}
-                                  value={editincome.values.fromScore}
+                                  value={editincome.values.minIncome}
                                 />
 
-                                {editincome.touched.fromScore &&
-                                editincome.errors.fromScore ? (
+                                {editincome.touched.minIncome &&
+                                editincome.errors.minIncome ? (
                                   <p className="error_text text-danger">
-                                    {editincome.errors.fromScore}
+                                    {editincome.errors.minIncome}
                                   </p>
                                 ) : null}
                               </>
@@ -602,13 +592,13 @@ function pricingmodel() {
                             {incomeedit === data.id ? (
                               <>
                                 <input
-                                  name="toScore"
-                                  className="form-select"
+                                  name="maxIncome"
+                                  className="form-control"
                                   placeholder="Enter To Score"
                                   id="editScoretToScore"
                                   // onChange={(e) => {
                                   //   setScoreEditValue({
-                                  //     ...scoreEditValue,
+                                  //     ...incomeEditValue,
                                   //     toScore: e.target.value.replace(
                                   //       /[^0-9]/g,
                                   //       ""
@@ -617,13 +607,13 @@ function pricingmodel() {
                                   // }}
                                   onChange={editincome.handleChange}
                                   onBlur={editincome.handleBlur}
-                                  value={editincome.values.toScore}
+                                  value={editincome.values.maxIncome}
                                 />
 
-                                {editincome.touched.toScore &&
-                                editincome.errors.toScore ? (
+                                {editincome.touched.maxIncome &&
+                                editincome.errors.maxIncome ? (
                                   <p className="error_text text-danger">
-                                    {editincome.errors.toScore}
+                                    {editincome.errors.maxIncome}
                                   </p>
                                 ) : null}
                               </>
@@ -642,7 +632,8 @@ function pricingmodel() {
                                     marginRight: "10px",
                                   }}
                                   onClick={() => {
-                                    editScore.handleSubmit();
+                                    h;
+                                    editincome.handleSubmit();
                                   }}
                                 >
                                   Save
@@ -651,7 +642,7 @@ function pricingmodel() {
                                   className="btn btn-primary"
                                   type="button"
                                   onClick={() => {
-                                    setScoreEdit(null);
+                                    setincomeid(null);
                                   }}
                                 >
                                   Cancel
@@ -666,12 +657,12 @@ function pricingmodel() {
                                     marginRight: "10px",
                                   }}
                                   onClick={() => {
-                                    setScoreEdit(data.id);
+                                    setincomeid(data.id);
                                     console.log(
                                       "tesr777777777777777777777",
                                       setScoreEditValue
                                     );
-                                    setScoreEditValue({
+                                    setincomeEditValue({
                                       fromScore: data.fromscore,
                                       toScore: data.toscore,
                                       offerId: score_n_offerData.filter(
