@@ -12,6 +12,8 @@ import Term from "./Page/term";
 import Termmapping from "./Page/termmapping";
 import Productvalue from "./Page/productvalue";
 import Runinsanbox from "./Page/runinsanbox";
+import Deconfig from "./Page/deconfig";
+
 import footerlogo from "./asset/whitelogo.svg";
 import MapProvider from "./Common/mapprovider";
 import { Post } from "./common_var/httpService";
@@ -32,6 +34,8 @@ function Admin() {
     { path: "/ruledatabases", element: <Ruledatabases /> },
     { path: "/productvalue", element: <Productvalue /> },
     { path: "/runinsanbox", element: <Runinsanbox /> },
+    { path: "/deconfig", element: <Deconfig /> },
+
     { path: "/", element: <Sidebar /> },
   ]);
   useEffect(() => {
@@ -87,7 +91,7 @@ function Admin() {
           : queryParams.pathname === "/grade"
           ? ""
           : queryParams.pathname === "/pricingmodel"
-          ? ""
+          ? " "
           : null}
       </div>
 

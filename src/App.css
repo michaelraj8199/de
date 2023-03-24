@@ -248,3 +248,11 @@ header .navbar {
     display: inline-block;
     background: #ffffff;
 }
+
+
+@media (min-width:320px) and (max-width: 740px) {
+  .ContentWrapper {
+    background-color: lightblue; 
+    width: 100%; 
+  }
+}

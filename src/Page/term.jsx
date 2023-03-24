@@ -31,6 +31,10 @@ function term() {
       term_description: "",
       settingId: initialState?.settingid?.setting_id,
     },
+    validationSchema: Yup.object({
+      term_description: Yup.string().required("*Term  is required"),
+      
+    }),
     onSubmit: async (values) => {
       let sendData = {
         term_description: values.term_description,
@@ -60,42 +64,43 @@ function term() {
     },
   });
 
-  // const gradeedit = useFormik({
-  //   initialValues: {
-  //     description: termeditedValue.description,
-  //   },
-  //   // validationSchema: validationSchema,
-  //   onSubmit: async (values) => {
-  //     let sendData = {
-  //       description: termeditedValue,
-  //     };
-  //     console.log(termeditedValue);
+  const gradeedit = useFormik({
+    initialValues: {
+      description: termeditedValue.description,
+    },
+    // validationSchema: validationSchema,
+    onSubmit: async (values) => {
+      let sendData = {
+        description: termeditedValue,
+      };
+      console.log(termeditedValue);
 
-  //     axios
-  //       .put(
-  //         `https://de-dev-api.theecentral.com/api/grade/update-grade/${termeditedRowId}`,
-  //         sendData,
-  //         config
-  //       )
-  //       .then(
-  //         (response) => {
-  //           if (response?.status === 200 || response?.status === 201) {
-  //             gradeedit.setValues(response?.termeditedValue);
-  //             settermEditedRowId(null);
-  //             // gettermList();
-  //             termadd.resetForm();
-  //             alert("Grade Updated Successfully");
-  //             gettermList();
-  //           } else {
-  //             alert("eerrror");
-  //           }
-  //         },
-  //         (error) => {
-  //           console.log(error);
-  //         }
-  //       );
-  //   },
-  // });
+      axios
+        .put(
+          `https://de-dev-api.theecentral.com/api/grade/update-grade/${termeditedRowId}`,
+          sendData,
+          config
+        )
+        .then(
+          (response) => {
+            if (response?.status === 200 || response?.status === 201) {
+              gradeedit.setValues(response?.termeditedValue);
+              settermEditedRowId(null);
+              // gettermList();
+              toast.success(res.message, { duration: 4000 });
+              termadd.resetForm();
+              // alert("Grade Updated Successfully");
+              gettermList();
+            } else {
+              alert("eerrror");
+            }
+          },
+          (error) => {
+            console.log(error);
+          }
+        );
+    },
+  });
 
   const gettermList = async () => {
     axios

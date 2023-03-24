@@ -1,10 +1,8 @@
-// import React from "react";
 import Sidebar from "../Common/Sidebar";
 import React, { useEffect, useState } from "react";
 import * as Yup from "yup";
 import { useFormik } from "formik";
 import toast from "react-hot-toast";
-// import { AuthGet, AuthPost, AuthPut, Put } from "../../common_var/httpService";
 import { useStateValue } from ".././Common/stateprovider";
 import axios from "axios";
 import Mapprovider from "../Common/mapprovider";
@@ -45,7 +43,8 @@ function grade() {
           (response) => {
             if (response?.status === 200 || response?.status === 201) {
               Gradeadd.resetForm();
-              alert("Grade Added Successfully");
+              toast.success("Grade Added Successfully");
+              // alert("Grade Added Successfully");
               getGradeList();
             } else {
               alert("eerrror");
@@ -80,12 +79,13 @@ function grade() {
             if (response?.status === 200 || response?.status === 201) {
               gradeedit.setValues(response?.gradeeditedValue);
               setgradeEditedRowId(null);
-              // getGradeList();
               Gradeadd.resetForm();
-              alert("Grade Updated Successfully");
+              toast.success("Grade Updated Successfully");
+
               getGradeList();
             } else {
-              alert("eerrror");
+              // alert("eerrror");
+              // toast.success("Grade Updated Successfully"); 
             }
           },
           (error) => {
@@ -125,7 +125,8 @@ function grade() {
       .put(
         `https://de-dev-api.theecentral.com/api/grade/grade-inactive/${id}`,
         // config,
-        sendData,config
+        sendData,
+        config
       )
       .then(
         (response) => {
