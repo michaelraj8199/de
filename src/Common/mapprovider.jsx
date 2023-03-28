@@ -21,7 +21,7 @@ function Mapprovider() {
 
   const getseetingList = async () => {
     axios
-      .get("https://de-qa.theecentral.com/api/rules-config/get-all-settings", config)
+      .get("http://localhost:8000/api/rules-config/get-all-settings", config)
       .then(function (response) {
         if (response?.status === 200) {
           setsetting(response?.data);
@@ -51,7 +51,7 @@ function Mapprovider() {
   useEffect(() => {
     if (token === null) {
       axios
-        .post("https://de-qa.theecentral.com/api/auth/login", {
+        .post("http://localhost:8000/api/auth/login", {
           email: "admin@de.com",
           password: "Admin@213$",
         })

@@ -39,7 +39,7 @@ function Term() {
 
       axios
         .post(
-          "https://de-qa.theecentral.com/api/term-model/add-term",
+          "http://localhost:8000/api/term-model/add-term",
           sendData,
           config
         )
@@ -73,7 +73,7 @@ function Term() {
 
       axios
         .put(
-          `https://de-qa.theecentral.com/api/grade/update-grade/${termeditedRowId}`,
+          `http://localhost:8000/api/grade/update-grade/${termeditedRowId}`,
           sendData,
           config
         )
@@ -99,7 +99,7 @@ function Term() {
   const gettermList = async () => {
     axios
       .get(
-        `https://de-qa.theecentral.com/api/term-model/get-all/${initialState?.settingid}`,
+        `http://localhost:8000/api/term-model/get-all/${initialState?.settingid}`,
         config
       )
       .then(function (response) {
@@ -122,7 +122,7 @@ function Term() {
 
     axios
       .put(
-        `https://de-qa.theecentral.com/api/term-model/update-inactive/${id}`,
+        `http://localhost:8000/api/term-model/update-inactive/${id}`,
         // config,
         sendData,
         config
