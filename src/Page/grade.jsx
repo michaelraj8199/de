@@ -34,7 +34,7 @@ function Grade() {
 
       axios
         .post(
-          "https://de-dev-api.theecentral.com/api/grade/add-grade",
+          "http://localhost:8000/api/grade/add-grade",
           sendData,
           config
         )
@@ -68,7 +68,7 @@ function Grade() {
 
       axios
         .put(
-          `https://de-dev-api.theecentral.com/api/grade/update-grade/${gradeeditedRowId}`,
+          `http://localhost:8000/api/grade/update-grade/${gradeeditedRowId}`,
           sendData,
           config
         )
@@ -96,7 +96,7 @@ function Grade() {
   const getGradeList = async () => {
     axios
       .get(
-        `https://de-dev-api.theecentral.com/api/grade/get-all/${initialState?.settingid}`,
+        `http://localhost:8000/api/grade/get-all/${initialState?.settingid}`,
         config
       )
       .then(function (response) {
@@ -119,7 +119,7 @@ function Grade() {
 
     axios
       .put(
-        `https://de-dev-api.theecentral.com/api/grade/grade-inactive/${id}`,
+        `http://localhost:8000/api/grade/grade-inactive/${id}`,
         // config,
         sendData,
         config

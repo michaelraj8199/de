@@ -33,7 +33,7 @@ function Productvalue() {
     onSubmit: async (values) => {
       if (values.offerId === "default") {
         alert("Offer Value Is Required");
-        // toast.error("Offer Value Is Required", { duration: 4000 });
+        toast.error("Offer Value Is Required");
         return;
       }
       values.offerValue = parseInt(values.offerValue);
@@ -42,7 +42,7 @@ function Productvalue() {
 
       axios
         .post(
-          "https://de-dev-api.theecentral.com/api/product-value/add-offervalue",
+          "http://localhost:8000/api/product-value/add-offervalue",
           values,
           config
         )
@@ -84,7 +84,7 @@ function Productvalue() {
       
       axios
       .put(
-        `https://de-dev-api.theecentral.com/api/product-value/update-offervalue/${productEditValue?.id}`,
+        `http://localhost:8000/api/product-value/update-offervalue/${productEditValue?.id}`,
         values,
         config
       ).then((res) => {
@@ -104,7 +104,7 @@ function Productvalue() {
   const getProductvalueList = async () => {
     axios
       .get(
-        `https://de-dev-api.theecentral.com/api/product-value/get-all-offervalue/${initialState?.settingid}`,
+        `http://localhost:8000/api/product-value/get-all-offervalue/${initialState?.settingid}`,
         config
       )
       .then(function (response) {
@@ -131,7 +131,7 @@ function Productvalue() {
 
     axios
       .put(
-        `https://de-dev-api.theecentral.com/api/grade/grade-inactive/${id}`,
+        `http://localhost:8000/api/grade/grade-inactive/${id}`,
         // config,
         sendData,
         config
@@ -160,18 +160,18 @@ function Productvalue() {
     
     axios
       .put(
-        `https://de-dev-api.theecentral.com/api/product-value/offervalue-inactive/${data.id}`,
+        `http://localhost:8000/api/product-value/offervalue-inactive/${data.id}`,
         // config,
         sendData,
         config
       )
       .then((response) => {
         if (response?.status === 200|| response?.status === 201) {
-          alert("product value ")
-          // toast.success(res.message, { duration: 4000 });
+          // alert("product value ")
+          toast.success("product value");
           getProductvalueList();
         } else {
-          // toast.error(res.message);
+          toast.error("please fill details ");
         }
       })
       .catch((err) => toast.error(err));

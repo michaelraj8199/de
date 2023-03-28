@@ -38,7 +38,7 @@ function Offerproduct() {
 
       axios
         .post(
-          "https://de-dev-api.theecentral.com/api/offer-products/add-offer",
+          "http://localhost:8000/api/offer-products/add-offer",
           sendData,
           config
         )
@@ -73,7 +73,7 @@ function Offerproduct() {
 
       axios
         .put(
-          `https://de-dev-api.theecentral.com/api/offer-products/update-offer/${offerproducteditedRowId}`,
+          `http://localhost:8000/api/offer-products/update-offer/${offerproducteditedRowId}`,
           sendData,
           config
         )
@@ -100,7 +100,7 @@ function Offerproduct() {
   const getofferproductList = async () => {
     axios
       .get(
-        `https://de-dev-api.theecentral.com/api/offer-products/get-all-offers/${initialState?.settingid}`,
+        `http://localhost:8000/api/offer-products/get-all-offers/${initialState?.settingid}`,
         config
       )
       .then(function (response) {
@@ -125,7 +125,7 @@ function Offerproduct() {
 
     axios
       .put(
-        `https://de-dev-api.theecentral.com/api/offer-products/offer-inactive/${id}`,
+        `http://localhost:8000/api/offer-products/offer-inactive/${id}`,
         // config,
         sendData,config
       )

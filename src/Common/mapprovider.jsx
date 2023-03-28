@@ -21,7 +21,7 @@ function Mapprovider() {
 
   const getseetingList = async () => {
     axios
-      .get("https://de-dev-api.theecentral.com/api/rules-config/get-all-settings", config)
+      .get("http://localhost:8000/api/rules-config/get-all-settings", config)
       .then(function (response) {
         if (response?.status === 200) {
           setsetting(response?.data);
@@ -92,7 +92,7 @@ function Mapprovider() {
             >
               {setting.data?.map((setting) => (
                 <option key={setting.id} value={setting.id}>
-                  {setting.setting_name}
+                  {setting.provider_name}
                 </option>
               ))}
             </select>
