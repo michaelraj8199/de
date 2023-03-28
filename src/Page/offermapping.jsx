@@ -8,7 +8,7 @@ import { useStateValue } from ".././Common/stateprovider";
 import axios from "axios";
 import Mapprovider from "../Common/mapprovider";
 
-function offermapping() {
+function Offermapping() {
   const [initialState] = useStateValue();
   const token = sessionStorage.getItem("Token");
   const [grade, setGrade] = useState([]);
@@ -340,4 +340,4 @@ function offermapping() {
   );
 }
 
-export default offermapping;
+export default Offermapping;

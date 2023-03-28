@@ -1,10 +1,10 @@
-// import React from 'react'
+
 import Sidebar from "../Common/Sidebar";
 import React, { useEffect, useState } from "react";
 import { useStateValue } from ".././Common/stateprovider";
 import Mapprovider from "../Common/mapprovider";
 
-function deconfig() {
+function Deconfig() {
   const [initialState] = useStateValue();
 
   return (
@@ -24,4 +24,4 @@ function deconfig() {
   );
 }
 
-export default deconfig;
+export default Deconfig;

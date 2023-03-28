@@ -7,7 +7,7 @@ import { useStateValue } from ".././Common/stateprovider";
 import axios from "axios";
 import Mapprovider from "../Common/mapprovider";
 
-function productvalue() {
+function Productvalue() {
   const [initialState] = useStateValue();
   const token = sessionStorage.getItem("Token");
   const [data, setdata] = useState([]);
@@ -418,4 +418,4 @@ function productvalue() {
   );
 }
 
-export default productvalue;
+export default Productvalue;

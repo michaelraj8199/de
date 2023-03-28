@@ -9,7 +9,7 @@ import axios from "axios";
 import Mapprovider from "../Common/mapprovider";
 
 
-function offerproduct() {
+function Offerproduct() {
   const [initialState] = useStateValue();
   console.log("ytryrystrysrystrsty", initialState);
   const token = sessionStorage.getItem("Token");
@@ -302,4 +302,4 @@ function offerproduct() {
   )
 }
 
-export default offerproduct
+export default Offerproduct

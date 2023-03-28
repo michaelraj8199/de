@@ -1,7 +1,7 @@
 import React from 'react'
 import Sidebar from "../Common/Sidebar";
 
-function ruledatabases() {
+function Ruledatabases() {
   return (
     <div>ruledatabases</div>
     // <div id="content">
@@ -41,4 +41,4 @@ function ruledatabases() {
   )
 }
 
-export default ruledatabases
+export default Ruledatabases

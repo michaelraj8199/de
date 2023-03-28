@@ -9,7 +9,7 @@ import { useStateValue } from ".././Common/stateprovider";
 import axios from "axios";
 import Mapprovider from "../Common/mapprovider";
 
-function pricingmodel() {
+function Pricingmodel() {
   const [initialState] = useStateValue();
   const token = sessionStorage.getItem("Token");
   const [score_n_offerData, setScore_n_offerData] = useState();
@@ -705,4 +705,4 @@ function pricingmodel() {
   );
 }
 
-export default pricingmodel;
+export default Pricingmodel;

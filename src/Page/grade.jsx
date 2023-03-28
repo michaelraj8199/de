@@ -6,7 +6,7 @@ import toast from "react-hot-toast";
 import { useStateValue } from ".././Common/stateprovider";
 import axios from "axios";
 import Mapprovider from "../Common/mapprovider";
-function grade() {
+function Grade() {
   const [initialState] = useStateValue();
   const token = sessionStorage.getItem("Token");
   const [data, setdata] = useState([]);
@@ -301,4 +301,4 @@ function grade() {
   );
 }
 
-export default grade;
+export default Grade;

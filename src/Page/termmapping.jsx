@@ -7,7 +7,7 @@ import toast from "react-hot-toast";
 import { useStateValue } from ".././Common/stateprovider";
 import axios from "axios";
 import Mapprovider from "../Common/mapprovider";
-function termmapping() {
+function Termmapping() {
   const [initialState] = useStateValue();
   const token = sessionStorage.getItem("Token");
 
@@ -274,4 +274,4 @@ function termmapping() {
   );
 }
 
-export default termmapping;
+export default Termmapping;

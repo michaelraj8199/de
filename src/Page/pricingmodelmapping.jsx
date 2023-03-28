@@ -8,7 +8,7 @@ import { useStateValue } from ".././Common/stateprovider";
 import axios from "axios";
 import Mapprovider from "../Common/mapprovider";
 
-function pricingmodelmapping() {
+function Pricingmodelmapping() {
   const [initialState] = useStateValue();
   const token = sessionStorage.getItem("Token");
   const [grade, setGrade] = useState([]);
@@ -280,4 +280,4 @@ function pricingmodelmapping() {
   );
 }
 
-export default pricingmodelmapping;
+export default Pricingmodelmapping;

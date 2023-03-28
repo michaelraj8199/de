@@ -7,7 +7,7 @@ import { useStateValue } from "./../Common/stateprovider";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
-function mapprovider() {
+function Mapprovider() {
   const [initialState] = useStateValue();
   const token = sessionStorage.getItem("Token");
   const [setting, setsetting] = useState([]);
@@ -103,4 +103,4 @@ function mapprovider() {
   );
 }
 
-export default mapprovider;
+export default Mapprovider;

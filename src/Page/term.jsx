@@ -8,7 +8,7 @@ import axios from "axios";
 import Mapprovider from "../Common/mapprovider";
 import Button from "react-bootstrap/Button";
 
-function term() {
+function Term() {
   const [initialState] = useStateValue();
   const token = sessionStorage.getItem("Token");
   const [data, setdata] = useState([]);
@@ -299,4 +299,4 @@ function term() {
   );
 }
 
-export default term;
+export default Term;
