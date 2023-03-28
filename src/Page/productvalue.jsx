@@ -41,7 +41,7 @@ function Productvalue() {
 
       axios
         .post(
-          "http://localhost:8000/api/product-value/add-offervalue",
+          "https://de-qa.theecentral.com/api/product-value/add-offervalue",
           values,
           config
         )
@@ -84,7 +84,7 @@ function Productvalue() {
       
       axios
       .put(
-        `http://localhost:8000/api/product-value/update-offervalue/${productEditValue?.id}`,
+        `https://de-qa.theecentral.com/api/product-value/update-offervalue/${productEditValue?.id}`,
         values,
         config
       ).then((res) => {
@@ -104,7 +104,7 @@ function Productvalue() {
   const getProductvalueList = async () => {
     axios
       .get(
-        `http://localhost:8000/api/product-value/get-all-offervalue/${initialState?.settingid}`,
+        `https://de-qa.theecentral.com/api/product-value/get-all-offervalue/${initialState?.settingid}`,
         config
       )
       .then(function (response) {
@@ -131,7 +131,7 @@ function Productvalue() {
 
     axios
       .put(
-        `http://localhost:8000/api/grade/grade-inactive/${id}`,
+        `https://de-qa.theecentral.com/api/grade/grade-inactive/${id}`,
         // config,
         sendData,
         config
@@ -162,7 +162,7 @@ function Productvalue() {
     
     axios
       .put(
-        `http://localhost:8000/api/product-value/offervalue-inactive/${data.id}`,
+        `https://de-qa.theecentral.com/api/product-value/offervalue-inactive/${data.id}`,
         // config,
         sendData,
         config

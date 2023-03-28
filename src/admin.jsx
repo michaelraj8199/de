@@ -39,7 +39,7 @@ function Admin() {
   ]);
   useEffect(() => {
     axios
-      .post("http://localhost:8000/api/auth/login", {
+      .post("https://de-qa.theecentral.com/api/auth/login", {
         email: "admin@de.com",
         password: "Admin@213$",
       })

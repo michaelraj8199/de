@@ -45,7 +45,7 @@ function Offermapping() {
 
       axios
         .post(
-          "http://localhost:8000/api/offers-mapping/add",
+          "https://de-qa.theecentral.com/api/offers-mapping/add",
           sendData,
           config
         )
@@ -70,7 +70,7 @@ function Offermapping() {
   const getProductvalueList = async () => {
     axios
       .get(
-        `http://localhost:8000/api/offers-mapping/get-all/${initialState?.settingid}`,
+        `https://de-qa.theecentral.com/api/offers-mapping/get-all/${initialState?.settingid}`,
         config
       )
       .then(function (response) {
@@ -100,7 +100,7 @@ function Offermapping() {
 
     axios
       .put(
-        `http://localhost:8000/api/offers-mapping/inactive/${id}`,
+        `https://de-qa.theecentral.com/api/offers-mapping/inactive/${id}`,
         sendData,
         config
       )

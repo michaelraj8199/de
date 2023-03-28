@@ -46,7 +46,7 @@ function Termmapping() {
 
       axios
         .post(
-          "http://localhost:8000/api/term-mapping/add",
+          "https://de-qa.theecentral.com/api/term-mapping/add",
           values,
           config
         )
@@ -72,7 +72,7 @@ function Termmapping() {
   const getProductvalueList = async () => {
     axios
       .get(
-        `http://localhost:8000/api/term-mapping/get-all/${initialState?.settingid}`,
+        `https://de-qa.theecentral.com/api/term-mapping/get-all/${initialState?.settingid}`,
         config
       )
       .then(function (response) {
@@ -95,7 +95,7 @@ function Termmapping() {
 
     axios
       .put(
-        `http://localhost:8000/api/term-mapping/inactive/${id}`,
+        `https://de-qa.theecentral.com/api/term-mapping/inactive/${id}`,
         sendData,
         config
       )

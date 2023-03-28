@@ -70,7 +70,7 @@ function Pricingmodelmapping() {
       };
 
       axios
-        .post("http://localhost:8000/api/pricing-mapping/add", sendData, config)
+        .post("https://de-qa.theecentral.com/api/pricing-mapping/add", sendData, config)
         .then(
           (response) => {
             if (response?.status === 200 || response?.status === 201) {
@@ -95,7 +95,7 @@ function Pricingmodelmapping() {
   const getProductvalueList = async () => {
     axios
       .get(
-        `http://localhost:8000/api/pricing-mapping/get-all/${initialState?.settingid}`,
+        `https://de-qa.theecentral.com/api/pricing-mapping/get-all/${initialState?.settingid}`,
         config
       )
       .then(function (response) {
@@ -140,7 +140,7 @@ function Pricingmodelmapping() {
       };
       console.log("formData::: ", formData);
       axios
-        .post(`http://localhost:8000/api/pricing-mapping/add`, formData)
+        .post(`https://de-qa.theecentral.com/api/pricing-mapping/add`, formData)
         .then((response) => {
           // console.log("res::: ", res);
           if (response.status === 200 || response?.status === 201) {

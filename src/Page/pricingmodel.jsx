@@ -48,7 +48,7 @@ function Pricingmodel() {
 
       axios
         .post(
-          "http://localhost:8000/api/pricing-model/add-score",
+          "https://de-qa.theecentral.com/api/pricing-model/add-score",
           values,
           config
         )
@@ -88,7 +88,7 @@ function Pricingmodel() {
 
       axios
         .post(
-          "http://localhost:8000/api/pricing-model/add-income",
+          "https://de-qa.theecentral.com/api/pricing-model/add-income",
           values,
           config
         )
@@ -129,7 +129,7 @@ function Pricingmodel() {
 
       axios
         .put(
-          `http://localhost:8000/api/pricing-model/update-score/${scoreEdit}`,
+          `https://de-qa.theecentral.com/api/pricing-model/update-score/${scoreEdit}`,
           values,
           config
         )
@@ -173,7 +173,7 @@ function Pricingmodel() {
 
       axios
         .put(
-          `http://localhost:8000/api/pricing-model/update-income/${incomeedit}`,
+          `https://de-qa.theecentral.com/api/pricing-model/update-income/${incomeedit}`,
           values,
           config
         )
@@ -201,7 +201,7 @@ function Pricingmodel() {
   const getScoreList = async () => {
     axios
       .get(
-        `http://localhost:8000/api/pricing-model/get-all-scores/${initialState?.settingid}`,
+        `https://de-qa.theecentral.com/api/pricing-model/get-all-scores/${initialState?.settingid}`,
         config
       )
       .then(function (response) {
@@ -219,7 +219,7 @@ function Pricingmodel() {
   const getincome = async () => {
     axios
       .get(
-        `http://localhost:8000/api/pricing-model/get-all-income/${initialState?.settingid}`,
+        `https://de-qa.theecentral.com/api/pricing-model/get-all-income/${initialState?.settingid}`,
         config
       )
       .then(function (response) {
