@@ -1,7 +1,7 @@
 // import React from "react";
 import Sidebar from "../Common/Sidebar";
 import React, { useEffect, useState } from "react";
-import * as Yup from "yup";
+// import * as Yup from "yup";
 import { useFormik } from "formik";
 import toast from "react-hot-toast";
 // import { AuthGet, AuthPost, AuthPut, Put } from "../../common_var/httpService";
@@ -37,7 +37,8 @@ function Pricingmodel() {
     },
     onSubmit: async (values) => {
       if (values.offerId === "default") {
-        alert("Offer Value Is Required");
+        toast.success("Offer Value Is Required");
+
         return;
       }
 
@@ -55,7 +56,7 @@ function Pricingmodel() {
           (response) => {
             if (response?.status === 200 || response?.status === 201) {
               addScore.resetForm();
-              alert(" Score Added Successfully");
+              toast.success("Score Added Successfully");
               getScoreList();
             } else {
               alert("eerrror");
@@ -76,7 +77,8 @@ function Pricingmodel() {
     },
     onSubmit: async (values) => {
       if (values.offerId === "default") {
-        alert("Offer Value Is Required");
+        // alert("Offer Value Is Required");
+        toast.success("Offer Value Is Required");
         return;
       }
 
@@ -94,7 +96,8 @@ function Pricingmodel() {
           (response) => {
             if (response?.status === 200 || response?.status === 201) {
               addScore.resetForm();
-              alert(" Income Added Successfully");
+              // alert(" Income Added Successfully");
+              toast.success("Income Added Successfully");
               getScoreList();
             } else {
               alert("eerrror");
@@ -134,10 +137,10 @@ function Pricingmodel() {
           (response) => {
             console.log("hgfddsgfdsgfdsg", response);
             if (response?.status === 200) {
-              // scoreEdit.setValues(response?.scoreEditValue);
 
               setScoreEdit(null);
-              alert(" opiuuk Updated Successfully");
+              toast.success("score Updated Successfully");
+
               resetForm();
               getScoreList();
             } else {
@@ -178,10 +181,10 @@ function Pricingmodel() {
           (response) => {
             console.log("hgfddsgfdsgfdsg", response);
             if (response?.status === 200) {
-              // scoreEdit.setValues(response?.incomeEditValue);
 
               setincomeid(null);
-              alert(" opiuuk Updated Successfully");
+              toast.success("Income Updated Successfully");
+
               resetForm();
               getScoreList();
             } else {

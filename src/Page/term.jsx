@@ -47,7 +47,8 @@ function Term() {
           (response) => {
             if (response?.status === 200 || response?.status === 201) {
               termadd.resetForm();
-              alert("Term Added Successfully");
+            toast.success("Term Added Successfully");
+
               gettermList();
             } else {
               alert("eerrror");
@@ -81,10 +82,8 @@ function Term() {
             if (response?.status === 200 || response?.status === 201) {
               gradeedit.setValues(response?.termeditedValue);
               settermEditedRowId(null);
-              // gettermList();
-              toast.success(response.message, { duration: 4000 });
+              toast.success("Grade Updated Successfully");
               termadd.resetForm();
-              // alert("Grade Updated Successfully");
               gettermList();
             } else {
               alert("eerrror");
@@ -132,7 +131,8 @@ function Term() {
         (response) => {
           if (response?.status === 200 || response?.status === 201) {
             gettermList();
-            alert("Term Delete Successfully");
+            toast.success("Term Delete Successfully");
+
           } else {
             alert("eerrror");
           }

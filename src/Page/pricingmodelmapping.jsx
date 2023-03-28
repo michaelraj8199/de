@@ -27,7 +27,7 @@ function Pricingmodelmapping() {
   const [scorevalue, setscoreValue] = useState([]);
   console.log("::::::::::::::::::::::::::::", scorevalue);
 
-  const [data, setdata] = useState([]);
+  // const [data, setdata] = useState([]);
   const handleClose = () => {
     setShow(false);
   };
@@ -75,7 +75,8 @@ function Pricingmodelmapping() {
           (response) => {
             if (response?.status === 200 || response?.status === 201) {
               Productvalueadd.resetForm();
-              alert("pricning mappinng Added Successfully");
+              toast.success("pricing mappinng Added Successfully");
+
               getProductvalueList();
             } else {
               alert("eerrror");
@@ -142,7 +143,7 @@ function Pricingmodelmapping() {
         .post(`http://localhost:8000/api/pricing-mapping/add`, formData)
         .then((response) => {
           // console.log("res::: ", res);
-          if (response.status == 200 || response?.status === 201) {
+          if (response.status === 200 || response?.status === 201) {
             toast.success("Grade APR updated successfully");
             fromikModal.resetForm();
           

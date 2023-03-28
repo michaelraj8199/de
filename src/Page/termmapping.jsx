@@ -54,7 +54,9 @@ function Termmapping() {
           (response) => {
             if (response?.status === 200 || response?.status === 201) {
               Productvalueadd.resetForm();
-              alert("Duration Added Successfully");
+        
+              toast.success("Duration Added Successfully");
+
               getProductvalueList();
             } else {
               alert("eerrror");

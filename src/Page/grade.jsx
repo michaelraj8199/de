@@ -1,6 +1,6 @@
 import Sidebar from "../Common/Sidebar";
 import React, { useEffect, useState } from "react";
-import * as Yup from "yup";
+// import * as Yup from "yup";
 import { useFormik } from "formik";
 import toast from "react-hot-toast";
 import { useStateValue } from ".././Common/stateprovider";
@@ -43,7 +43,6 @@ function Grade() {
             if (response?.status === 200 || response?.status === 201) {
               Gradeadd.resetForm();
               toast.success("Grade Added Successfully");
-              // alert("Grade Added Successfully");
               getGradeList();
             } else {
               alert("eerrror");
@@ -128,7 +127,9 @@ function Grade() {
         (response) => {
           if (response?.status === 200 || response?.status === 201) {
             getGradeList();
-            alert("Grade Delete Successfully");
+            // alert("Grade Delete Successfully");
+          toast.success("Grade Delete Successfully");
+
           } else {
             alert("eerrror");
           }

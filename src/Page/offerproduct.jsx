@@ -1,7 +1,7 @@
 
 import Sidebar from "../Common/Sidebar";
 import React, { useEffect, useState } from "react";
-import * as Yup from "yup";
+// import * as Yup from "yup";
 import { useFormik } from "formik";
 import toast from "react-hot-toast";
 import { useStateValue } from ".././Common/stateprovider";
@@ -46,7 +46,8 @@ function Offerproduct() {
           (response) => {
             if (response?.status === 200 || response?.status === 201) {
               Offeradd.resetForm();
-              alert("Offer Product Added Successfully");
+              toast.success("Offer Product Added Successfully");
+              
               getofferproductList();
             } else {
               alert("eerrror");
@@ -82,9 +83,10 @@ function Offerproduct() {
             if (response?.status === 200 || response?.status === 201) {
               gradeedit.setValues(response?.offerproducteditedValue);
               setofferproductEditedRowId(null);
-              // getofferproductList();
               Offeradd.resetForm();
-              alert("Offer product Updated Successfully");
+              toast.success("Offer product Updated Successfully");
+              
+
               getofferproductList();
             } else {
               alert("eerrror");
@@ -133,7 +135,8 @@ function Offerproduct() {
         (response) => {
           if (response?.status === 200 || response?.status === 201) {
             getofferproductList();
-            alert("Offer product Delete Successfully");
+            toast.success("Offer product Delete Successfully");
+            
           } else {
             alert("eerrror");
           }

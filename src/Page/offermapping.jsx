@@ -53,7 +53,8 @@ function Offermapping() {
           (response) => {
             if (response?.status === 200 || response?.status === 201) {
               Productvalueadd.resetForm();
-              alert("Duration Added Successfully");
+              toast.success("Duration Added Successfully");
+
               getProductvalueList();
             } else {
               alert("eerrror");
@@ -105,7 +106,6 @@ function Offermapping() {
       )
       .then((response) => {
         if (response?.status === 200 || response?.status === 201) {
-          alert("Offer mapping delete ");
           toast.success("Offer mapping delete");
           getProductvalueList();
         } else {

@@ -32,7 +32,6 @@ function Productvalue() {
     },
     onSubmit: async (values) => {
       if (values.offerId === "default") {
-        alert("Offer Value Is Required");
         toast.error("Offer Value Is Required");
         return;
       }
@@ -50,7 +49,8 @@ function Productvalue() {
           (response) => {
             if (response?.status === 200 || response?.status === 201) {
               Productvalueadd.resetForm();
-              alert("Product Value Added Successfully");
+              toast.success("Product Value Added Successfully");
+
               getProductvalueList();
             } else {
               alert("eerrror");
@@ -140,7 +140,9 @@ function Productvalue() {
         (response) => {
           if (response?.status === 200 || response?.status === 201) {
             getProductvalueList();
-            alert("Grade Delete Successfully");
+            toast.success("Grade Delete Successfully");
+
+            
           } else {
             alert("eerrror");
           }
@@ -167,7 +169,6 @@ function Productvalue() {
       )
       .then((response) => {
         if (response?.status === 200|| response?.status === 201) {
-          // alert("product value ")
           toast.success("product value");
           getProductvalueList();
         } else {
